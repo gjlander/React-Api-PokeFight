@@ -1,9 +1,6 @@
 import axios from "axios";
 
-//copy of same file from VinylCountdown app, with axios fetches we used from our own backend
-
-// import axios from "axios";
-// const backend = "http://localhost:24601"; //! Temp
+// const backend = "https://pokefight-server-onts.onrender.com"; //
 // // const backend = import.meta.env.VITE_BACKEND_URL_DEPLOY; //! Uncomment
 
 // //User functionality
