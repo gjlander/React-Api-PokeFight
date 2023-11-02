@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const backend = "http://localhost:7000"; //temp, will go back and configure properly for front and backend later
 
 const getSinglePokemon = async (pokeName) => {
@@ -28,6 +29,7 @@ export { getSinglePokemon, getPokemonById };
 
 // import axios from "axios";
 // const backend = "http://localhost:24601"; //! Temp
+
 // // const backend = import.meta.env.VITE_BACKEND_URL_DEPLOY; //! Uncomment
 
 // //User functionality
