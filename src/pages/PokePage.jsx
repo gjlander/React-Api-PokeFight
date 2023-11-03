@@ -1,9 +1,19 @@
-const PokePage = () => {
-    return (
-        <div className="min-h-screen min-w-screen flex items-center justify-center">
-            <h3 className="text-4xl">PokePage PlaceHolder</h3>
-        </div>
-    );
-};
+import Pokemons from "../components/Pokemons";
 
+const PokePage = () => {
+    return (     
+      <>
+          <div className="container mx-auto py-10 bg-black flex">
+              <div className="left-container">
+  
+              </div>
+              <div className="right-container">
+  
+              </div>
+  
+          </div>
+      </>
+    )
+  }
+ 
 export default PokePage;
