@@ -18,14 +18,14 @@ function App() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<LandingPage />} />
                     <Route path="search" element={<SearchPage />} />
-                    <Route path="pokemon/:pokemonId" element={<PokePage />} />
+                    <Route path="pokemon" element={<PokePage />} />
                     <Route path="battle" element={<GamePage />} />
                     <Route path="*" element={<NotFound />} />
 
                     {/* routes we could add for user experience */}
                     {/* <Route path="signin" element={<SignIn />} />
                     <Route path="register" element={<Register />} /> */}
-                </Route>
+                </Route>    
             </Routes>
         </>
     );

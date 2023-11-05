@@ -1,5 +1,5 @@
 
-const pokemons = () => {
+const Pokemons = () => {
   return (
     <>
         <div className="container mx-auto py-10 bg-black flex">
@@ -15,4 +15,4 @@ const pokemons = () => {
   )
 }
 
-export default pokemons;
+export default Pokemons;
