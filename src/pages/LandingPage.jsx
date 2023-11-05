@@ -9,10 +9,14 @@ import {
     TableBody,
     TableRow,
     TableCell,
+    Button,
 } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 import exampleBattle from "../assets/ExampleBattle.png";
 
 const LandingPage = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="min-h-screen min-w-screen flex flex-col items-center p-4 gap-8">
             <Image src="https://fontmeme.com/permalink/231105/aa303acd63d14025e61578dd113c010e.png" />
@@ -24,6 +28,16 @@ const LandingPage = () => {
                 </CardHeader>
                 <CardBody className="flex flex-col items-center">
                     <Image className="mx-auto" src={exampleBattle} />
+                    <Button
+                        onClick={() => {
+                            navigate("/battle");
+                        }}
+                        size="lg"
+                        color="danger"
+                        className="m-4"
+                    >
+                        Go Battle!
+                    </Button>
                     <Table isStriped>
                         <TableHeader>
                             <TableColumn>Type</TableColumn>
