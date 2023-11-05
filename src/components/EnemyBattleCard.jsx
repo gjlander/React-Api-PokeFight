@@ -1,8 +1,18 @@
-import { Card, CardFooter, CardBody, Image, Divider } from "@nextui-org/react";
+// import { useState } from "react";
+import {
+    Card,
+    CardFooter,
+    CardBody,
+    Image,
+    Divider,
+    Progress,
+} from "@nextui-org/react";
 import AttackBtn from "./AttackBtn";
-import HPBar from "./HPBar";
+// import HPBar from "./HPBar";
 
-export default function BattleCard({ name, sprite, type, base }) {
+export default function EnemyBattleCard({ name, sprite, type, enemyHP }) {
+    // const [value, setValue] = useState(enemyHP);
+    // setValue; //to make VS Code shutup setValue isn't called yet.
     return (
         <Card className="py-4">
             <CardBody className="overflow-visible py-2">
@@ -16,7 +26,15 @@ export default function BattleCard({ name, sprite, type, base }) {
             <Divider className="mb-2" />
             <CardFooter className="pb-0 pt-2 px-4 flex-col items-center">
                 <h4 className="font-bold text-large">{name.english}</h4>
-                <HPBar {...base} />
+                <Progress
+                    aria-label="HP"
+                    size="md"
+                    value={enemyHP.currentHP}
+                    maxValue={enemyHP.maxHP}
+                    color="danger"
+                    label={`HP ${enemyHP.currentHP}/${enemyHP.maxHP}`}
+                    className="max-w-md mb-4"
+                />
                 <div className="flex gap-4">
                     <AttackBtn type="Base" />
                     {type.map((typing) => (
