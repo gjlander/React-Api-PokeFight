@@ -5,7 +5,7 @@ const PokePage = () => {
       <>
           <div className="container mx-auto py-10 bg-black flex">
               <div className="left-container">
-  
+                <Pokemons/>
               </div>
               <div className="right-container">
   

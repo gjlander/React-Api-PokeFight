@@ -25,7 +25,7 @@ function App() {
                     {/* routes we could add for user experience */}
                     {/* <Route path="signin" element={<SignIn />} />
                     <Route path="register" element={<Register />} /> */}
-                </Route>
+                </Route>    
             </Routes>
         </>
     );
