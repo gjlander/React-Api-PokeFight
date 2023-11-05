@@ -19,7 +19,7 @@ const LandingPage = () => {
             <Card>
                 <CardHeader className="w-full flex  justify-center">
                     <h3 className="text-4xl">
-                        Battle wiTableColumn your favorite Pokemon!
+                        Battle with your favorite Pokemon!
                     </h3>
                 </CardHeader>
                 <CardBody className="flex flex-col items-center">
