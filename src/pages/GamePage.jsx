@@ -12,7 +12,7 @@ const GamePage = () => {
     const [enemyHP, setEnemyHP] = useState({ currentHP: null, maxHP: null });
 
     useEffect(() => {
-        getSinglePokemon("mewtwo")
+        getSinglePokemon("charizard")
             .then((pokemon) => {
                 setMyPokemon(pokemon);
                 // console.log("dot notation", myPokemon.base.HP);

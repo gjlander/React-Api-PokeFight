@@ -36,7 +36,6 @@ export default function EnemyBattleCard({ name, sprite, type, enemyHP }) {
                     className="max-w-md mb-4"
                 />
                 <div className="flex gap-4">
-                    <AttackBtn type="Base" />
                     {type.map((typing) => (
                         <AttackBtn key={crypto.randomUUID()} type={typing} />
                     ))}

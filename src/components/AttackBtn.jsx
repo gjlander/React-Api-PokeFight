@@ -1,5 +1,5 @@
 import { Button } from "@nextui-org/react";
-import { btnColor, baseAttack } from "../lib/battleData";
+import { btnColor, baseAttack, typeAttack } from "../lib/battleData";
 
 export default function AttackBtn({
     type,
@@ -18,7 +18,18 @@ export default function AttackBtn({
         const myDmg = baseAttack(myBase, enemyBase);
         const enemyDmg = baseAttack(enemyBase, myBase);
         // console.log(dmg);
-        setEnemyHP((prev) => ({ ...prev, currentHP: prev.currentHP - myDmg }));
+        if (type === "Base") {
+            setEnemyHP((prev) => ({
+                ...prev,
+                currentHP: prev.currentHP - myDmg,
+            }));
+        } else {
+            const typeDmg = typeAttack(type, enemyPokemon, myDmg);
+            setEnemyHP((prev) => ({
+                ...prev,
+                currentHP: prev.currentHP - typeDmg,
+            }));
+        }
         setMyHP((prev) => ({ ...prev, currentHP: prev.currentHP - enemyDmg }));
     };
     return (

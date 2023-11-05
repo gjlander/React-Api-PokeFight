@@ -56,9 +56,10 @@ export default function MyBattleCard({
                         <AttackBtn
                             key={crypto.randomUUID()}
                             type={typing}
-                            // setEnemyHP={setEnemyHP}
-                            // {...base}
-                            // enemyPokemon={enemyPokemon}
+                            setEnemyHP={setEnemyHP}
+                            myBase={base}
+                            enemyPokemon={enemyPokemon}
+                            setMyHP={setMyHP}
                         />
                     ))}
                 </div>
