@@ -11,11 +11,11 @@ const GamePage = () => {
     const [enemyPokemon, setEnemyPokemon] = useState();
     const [myHP, setMyHP] = useState({ currentHP: 100, maxHP: 100 });
     const [enemyHP, setEnemyHP] = useState({ currentHP: 100, maxHP: 100 });
-    const { user, setUser } = useAppContext();
+    const { user, setUser, chosenPokemon } = useAppContext();
     // const { myPokemon, setMyPokemon } = useAppContext();
 
     useEffect(() => {
-        getSinglePokemon("charizard")
+        getSinglePokemon(chosenPokemon)
             .then((pokemon) => {
                 setMyPokemon(pokemon);
                 // console.log("dot notation", myPokemon.base.HP);
@@ -26,7 +26,7 @@ const GamePage = () => {
                 }));
             })
             .catch((error) => console.error(error));
-    }, []);
+    }, [chosenPokemon]);
     useEffect(() => {
         getPokemonById(`${Math.floor(Math.random() * 152)}`)
             .then((pokemon) => {
@@ -42,7 +42,7 @@ const GamePage = () => {
 
     useEffect(() => {
         // if (!enemyHP || !myHP) return;
-        if (enemyHP.currentHP <= 0 || myHP.currentHP <= 0) {
+        if ((enemyHP.currentHP <= 0 || myHP.currentHP <= 0) && user) {
             editBattles(user.username, myHP.currentHP);
             // enemyHP.currentHP <= 0
             //     ? setUser((prev) => ({

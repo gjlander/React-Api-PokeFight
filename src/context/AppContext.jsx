@@ -7,7 +7,7 @@ export const useAppContext = () => useContext(AppContextObj);
 const AppContext = ({ children }) => {
     const isSignedIn = JSON.parse(localStorage.getItem("user"));
     const [user, setUser] = useState(isSignedIn);
-    // const [myPokemon, setMyPokemon] = useState("charizard");
+    const [chosenPokemon, setChosenPokemon] = useState("charizard");
 
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(user));
@@ -18,8 +18,8 @@ const AppContext = ({ children }) => {
             value={{
                 user,
                 setUser,
-                // myPokemon,
-                // setMyPokemon,
+                chosenPokemon,
+                setChosenPokemon,
             }}
         >
             {children}

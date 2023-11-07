@@ -18,6 +18,7 @@ export default function GameEndModal({ myCurrentHP }) {
     useEffect(() => {
         console.log("modal effect was called");
         onOpen();
+        if (!user) return;
         myCurrentHP <= 0
             ? setUser((prev) => ({
                   ...prev,
@@ -27,7 +28,7 @@ export default function GameEndModal({ myCurrentHP }) {
                   ...prev,
                   battlesWon: prev.battlesWon + 1,
               }));
-    }, [onOpen, setUser, myCurrentHP]);
+    }, [onOpen, user, setUser, myCurrentHP]);
 
     const navigate = useNavigate();
 
@@ -57,8 +58,22 @@ export default function GameEndModal({ myCurrentHP }) {
                                 {myCurrentHP > 0 ? "You won!" : "You lost!"}
                             </ModalHeader>
                             <ModalBody>
-                                <p>Total Battles Won: {user.battlesWon}</p>
-                                <p>Total Battle Lost: {user.battlesLost}</p>
+                                {user ? (
+                                    <>
+                                        {" "}
+                                        <p>
+                                            Total Battles Won: {user.battlesWon}
+                                        </p>
+                                        <p>
+                                            Total Battle Lost:{" "}
+                                            {user.battlesLost}
+                                        </p>
+                                    </>
+                                ) : (
+                                    <p>
+                                        Login to keep track of your battle data!
+                                    </p>
+                                )}
                             </ModalBody>
                             <ModalFooter>
                                 <Button
