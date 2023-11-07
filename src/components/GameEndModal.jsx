@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 import {
     Modal,
     ModalContent,
@@ -12,10 +13,22 @@ import {
 
 export default function GameEndModal({ myCurrentHP }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    // onOpen();
+    const { user, setUser } = useAppContext();
+
     useEffect(() => {
+        console.log("modal effect was called");
         onOpen();
-    }, [onOpen]);
+        myCurrentHP <= 0
+            ? setUser((prev) => ({
+                  ...prev,
+                  battlesLost: prev.battlesLost + 1,
+              }))
+            : setUser((prev) => ({
+                  ...prev,
+                  battlesWon: prev.battlesWon + 1,
+              }));
+    }, [onOpen, setUser, myCurrentHP]);
+
     const navigate = useNavigate();
 
     const handleNewPkmn = () => {
@@ -38,12 +51,8 @@ export default function GameEndModal({ myCurrentHP }) {
                                 {myCurrentHP > 0 ? "You won!" : "You lost!"}
                             </ModalHeader>
                             <ModalBody>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Nullam pulvinar risus non
-                                    risus hendrerit venenatis. Pellentesque sit
-                                    amet hendrerit risus, sed porttitor quam.
-                                </p>
+                                <p>Total Battles Won: {user.battlesWon}</p>
+                                <p>Total Battle Lost: {user.battlesLost}</p>
                             </ModalBody>
                             <ModalFooter>
                                 <Button

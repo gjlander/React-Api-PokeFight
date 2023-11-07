@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { getSinglePokemon, getPokemonById } from "../lib/dbClient";
+import { getSinglePokemon, getPokemonById, editBattles } from "../lib/dbClient";
+import { useAppContext } from "../context/AppContext";
 import MyBattleCard from "../components/MyBattleCard";
 import EnemyBattleCard from "../components/EnemyBattleCard";
 import GameEndModal from "../components/GameEndModal";
@@ -8,8 +9,10 @@ const GamePage = () => {
     //placeholder so I have something to work with until we decide how to store chosen pokemon
     const [myPokemon, setMyPokemon] = useState();
     const [enemyPokemon, setEnemyPokemon] = useState();
-    const [myHP, setMyHP] = useState({ currentHP: null, maxHP: null });
-    const [enemyHP, setEnemyHP] = useState({ currentHP: null, maxHP: null });
+    const [myHP, setMyHP] = useState({ currentHP: 100, maxHP: 100 });
+    const [enemyHP, setEnemyHP] = useState({ currentHP: 100, maxHP: 100 });
+    const { user, setUser } = useAppContext();
+    // const { myPokemon, setMyPokemon } = useAppContext();
 
     useEffect(() => {
         getSinglePokemon("charizard")
@@ -37,6 +40,22 @@ const GamePage = () => {
             .catch((error) => console.error(error));
     }, []);
 
+    useEffect(() => {
+        // if (!enemyHP || !myHP) return;
+        if (enemyHP.currentHP <= 0 || myHP.currentHP <= 0) {
+            editBattles(user.username, myHP.currentHP);
+            // enemyHP.currentHP <= 0
+            //     ? setUser((prev) => ({
+            //           ...prev,
+            //           battlesWon: prev.battlesWon + 1,
+            //       }))
+            //     : setUser((prev) => ({
+            //           ...prev,
+            //           battlesLost: prev.battlesLost + 1,
+            //       }));
+        }
+    }, [enemyHP, myHP, user, setUser]);
+
     return (
         <div className="min-h-screen min-w-screen flex flex-col items-center gap-10">
             <h3 className="text-4xl mt-10">Battle!</h3>
@@ -49,6 +68,7 @@ const GamePage = () => {
                         {...myPokemon}
                         enemyPokemon={enemyPokemon}
                         myHP={myHP}
+                        enemyHP={enemyHP}
                         setEnemyHP={setEnemyHP}
                         setMyHP={setMyHP}
                     />

@@ -1,5 +1,7 @@
 import { Button } from "@nextui-org/react";
-import { btnColor, baseAttack, typeAttack } from "../lib/battleData";
+import { btnColor, baseAttack, typeAttack } from "../utils/battleData.js";
+// import { editBattles } from "../lib/dbClient.js";
+// import { useAppContext } from "../context/AppContext.jsx";
 
 export default function AttackBtn({
     type,
@@ -7,10 +9,14 @@ export default function AttackBtn({
     setMyHP,
     enemyPokemon,
     setEnemyHP,
+    // myHP,
+    // enemyHP,
 }) {
     // myBase &&
     //     enemyPokemon &&
     //     console.log(myBase.Attack, enemyPokemon.base.Attack);
+    // const { user } = useAppContext();
+
     const handleClick = () => {
         if (!myBase || !enemyPokemon) return;
         const enemyBase = enemyPokemon.base;
@@ -18,6 +24,7 @@ export default function AttackBtn({
         const myDmg = baseAttack(myBase, enemyBase);
         const enemyDmg = baseAttack(enemyBase, myBase);
         // console.log(dmg);
+
         if (type === "Base") {
             setEnemyHP((prev) => ({
                 ...prev,

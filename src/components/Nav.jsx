@@ -12,8 +12,10 @@ import {
     Avatar,
 } from "@nextui-org/react";
 import { SearchIcon } from "../assets/SearchIcon";
+import { useAppContext } from "../context/AppContext";
 
 export default function Nav() {
+    const { user } = useAppContext();
     return (
         <Navbar isBordered>
             <NavbarContent justify="start">
@@ -34,7 +36,7 @@ export default function Nav() {
                             aria-current="page"
                             color="foreground"
                         >
-                            Pokemons
+                            Pokemon
                         </Link>
                     </NavbarItem>
                     <NavbarItem>
@@ -68,14 +70,16 @@ export default function Nav() {
                             color="secondary"
                             name="Jason Hughes"
                             size="sm"
-                            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                            src="https://fontmeme.com/permalink/231107/b36df41834b00ed3ae7baba47847a7a6.png"
                         />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Profile Actions" variant="flat">
-                        <DropdownItem key="profile" className="h-14 gap-2">
-                            <p className="font-semibold">Signed in as</p>
-                            <p className="font-semibold">zoey@example.com</p>
-                        </DropdownItem>
+                        {user && (
+                            <DropdownItem key="profile" className="h-14 gap-2">
+                                <p className="font-semibold">Signed in as</p>
+                                <p className="font-semibold">{user.username}</p>
+                            </DropdownItem>
+                        )}
                         <DropdownItem key="settings">My Settings</DropdownItem>
                         <DropdownItem key="team_settings">
                             Team Settings
@@ -84,7 +88,7 @@ export default function Nav() {
                             Help & Feedback
                         </DropdownItem>
                         <DropdownItem key="logout" color="danger">
-                            Log Out
+                            {user ? "Sign Out" : "Sign In"}
                         </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>

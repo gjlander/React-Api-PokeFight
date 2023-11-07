@@ -17,6 +17,7 @@ export default function MyBattleCard({
     base,
     myHP,
     setMyHP,
+    enemyHP,
     setEnemyHP,
     enemyPokemon,
 }) {
@@ -47,9 +48,11 @@ export default function MyBattleCard({
                 <div className="flex gap-4">
                     <AttackBtn
                         type="Base"
+                        enemyHP={enemyHP}
                         setEnemyHP={setEnemyHP}
                         myBase={base}
                         enemyPokemon={enemyPokemon}
+                        myHP={myHP}
                         setMyHP={setMyHP}
                     />
                     {type.map((typing) => (

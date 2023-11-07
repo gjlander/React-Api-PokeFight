@@ -1,15 +1,17 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input, Button } from "@nextui-org/react";
 import { MailIcon } from "../assets/MailIcon.jsx";
 import { EyeFilledIcon } from "../assets/EyeFilledIcon.jsx";
 import { EyeSlashFilledIcon } from "../assets/EyeSlashFilledIcon.jsx";
+import { signInUser } from "../lib/dbClient.js";
+import { useAppContext } from "../context/AppContext.jsx";
 const SignIn = () => {
     const [form, setForm] = useState({
         username: "",
         password: "",
     });
-    // const { setUser } = useContext(UserContext);
+    const { setUser } = useAppContext();
 
     //state and function for toggling password visibility
     const [isVisible, setIsVisible] = useState(false);
@@ -27,7 +29,7 @@ const SignIn = () => {
         signInUser(form)
             .then((userData) => {
                 let test = userData;
-                if (userData.length) {
+                if (userData) {
                     setUser(userData);
                 } else {
                     setUser(false);
@@ -36,7 +38,7 @@ const SignIn = () => {
                 // userData.length ? setUser(userData) : setUser(false);
             })
             .then((test) => {
-                if (!test.length) return alert("Invalid username or password!");
+                if (!test) return alert("Invalid username or password!");
                 setForm({
                     username: "",
                     password: "",

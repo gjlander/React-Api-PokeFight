@@ -1,6 +1,8 @@
-import { useState, useContext, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input, Button } from "@nextui-org/react";
+import { makeNewUser, signInUser } from "../lib/dbClient";
+import { useAppContext } from "../context/AppContext";
 // import SignInModal from "../components/SignInModal";
 
 const Register = () => {
@@ -13,7 +15,7 @@ const Register = () => {
         profilePic: "",
     });
     const [registered, setRegistered] = useState(false);
-    // const { setUser } = useContext(UserContext);
+    const { setUser } = useAppContext();
 
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -25,9 +27,9 @@ const Register = () => {
         //imported now :)
         signInUser(form)
             .then((userData) => {
-                if (!userData.length)
+                if (!userData)
                     return alert("Sorry, an error occurred while logging in");
-                userData.length ? setUser(userData) : setUser(false);
+                userData ? setUser(userData) : setUser(false);
             })
             .catch((error) => console.error(error));
         navigate("/");
