@@ -7,6 +7,8 @@ import LandingPage from "./pages/LandingPage";
 import SearchPage from "./pages/SearchPage";
 import PokePage from "./pages/PokePage";
 import GamePage from "./pages/GamePage";
+import SignIn from "./pages/SignIn";
+import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 
 // import Background from "./components/Background";
@@ -20,12 +22,10 @@ function App() {
                     <Route path="search" element={<SearchPage />} />
                     <Route path="pokemon" element={<PokePage />} />
                     <Route path="battle" element={<GamePage />} />
+                    <Route path="signin" element={<SignIn />} />
+                    <Route path="register" element={<Register />} />
                     <Route path="*" element={<NotFound />} />
-
-                    {/* routes we could add for user experience */}
-                    {/* <Route path="signin" element={<SignIn />} />
-                    <Route path="register" element={<Register />} /> */}
-                </Route>    
+                </Route>
             </Routes>
         </>
     );

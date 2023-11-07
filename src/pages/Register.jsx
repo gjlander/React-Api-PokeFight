@@ -1,21 +1,19 @@
 import { useState, useContext, useMemo } from "react";
-import { UserContext } from "../Contexts";
-import { signInUser } from "../lib/dbClient";
-import { makeNewUser } from "../lib/dbClient";
 import { useNavigate } from "react-router-dom";
 import { Input, Button } from "@nextui-org/react";
-import SignInModal from "../components/SignInModal";
+// import SignInModal from "../components/SignInModal";
 
 const Register = () => {
     const [form, setForm] = useState({
         firstName: "",
         lastName: "",
         email: "",
+        username: "",
         password: "",
         profilePic: "",
     });
     const [registered, setRegistered] = useState(false);
-    const { setUser } = useContext(UserContext);
+    // const { setUser } = useContext(UserContext);
 
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -109,6 +107,16 @@ const Register = () => {
                         />
                         <Input
                             isRequired
+                            type="text"
+                            label="Username"
+                            labelPlacement="outside"
+                            name="username"
+                            value={form.username}
+                            onChange={handleChange}
+                            className="w-full md:w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2 "
+                        />
+                        <Input
+                            isRequired
                             type="password"
                             label="Password"
                             labelPlacement="outside"
@@ -118,26 +126,17 @@ const Register = () => {
                             onChange={handleChange}
                             className="w-full md:w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
                         />
-                        <Input
-                            type="text"
-                            label="Profile Pic"
-                            description="Please use an image URL"
-                            labelPlacement="outside"
-                            name="profilePic"
-                            value={form.profilePic}
-                            onChange={handleChange}
-                            className="w-full md:w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
-                        />
                     </div>
                     <br />
                     <div className="flex w-full">
                         <Button
                             onClick={(e) => {
                                 e.preventDefault();
+                                navigate("/signin");
                             }}
                             className="w-1/2 bg-accent hover:bg-info-content hover:border-info-content rounded-none text-black dark:text-white font-normal text-lg p-4 transition-none uppercase"
                         >
-                            <SignInModal />
+                            Sign In
                         </Button>
                         <Button
                             type="submit"

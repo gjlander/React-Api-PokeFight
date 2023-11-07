@@ -1,17 +1,15 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInUser } from "../lib/dbClient";
-import { UserContext } from "../Contexts";
 import { Input, Button } from "@nextui-org/react";
 import { MailIcon } from "../assets/MailIcon.jsx";
 import { EyeFilledIcon } from "../assets/EyeFilledIcon.jsx";
 import { EyeSlashFilledIcon } from "../assets/EyeSlashFilledIcon.jsx";
 const SignIn = () => {
     const [form, setForm] = useState({
-        email: "",
+        username: "",
         password: "",
     });
-    const { setUser } = useContext(UserContext);
+    // const { setUser } = useContext(UserContext);
 
     //state and function for toggling password visibility
     const [isVisible, setIsVisible] = useState(false);
@@ -38,9 +36,9 @@ const SignIn = () => {
                 // userData.length ? setUser(userData) : setUser(false);
             })
             .then((test) => {
-                if (!test.length) return alert("Invalid email or password!");
+                if (!test.length) return alert("Invalid username or password!");
                 setForm({
-                    email: "",
+                    username: "",
                     password: "",
                 });
                 navigate("/");
@@ -64,10 +62,10 @@ const SignIn = () => {
                     <Input
                         isRequired
                         type="text"
-                        label="E-mail"
+                        label="Username"
                         labelPlacement="outside"
-                        name="email"
-                        value={form.email}
+                        name="username"
+                        value={form.username}
                         onChange={handleChange}
                         className="w-full mb-4 p-2"
                         endContent={

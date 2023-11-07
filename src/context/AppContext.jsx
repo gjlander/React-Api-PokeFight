@@ -1,33 +1,18 @@
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, createContext, useContext } from "react";
 
 const AppContextObj = createContext();
 
 export const useAppContext = () => useContext(AppContextObj);
 
 const AppContext = ({ children }) => {
-    const [products, setProducts] = useState(null);
-    const [checkout, setCheckout] = useState({
-        firstName: "",
-        lastName: "",
-        address: "",
-        zip: "",
-        city: "",
-        shipping: "DHL",
-        payment: "Credit_Card",
-    });
-
-    // useEffect(() => {
-    //     getProducts().then((fetchedProducts) => setProducts(fetchedProducts));
-    // }, []);
+    const isSignedIn = JSON.parse(localStorage.getItem("user"));
+    const [user, setUser] = useState(isSignedIn);
 
     return (
         <AppContextObj.Provider
             value={{
-                products,
-                setProducts,
-
-                checkout,
-                setCheckout,
+                user,
+                setUser,
             }}
         >
             {children}
