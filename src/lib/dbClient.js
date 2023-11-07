@@ -70,12 +70,23 @@ const editBattles = (username, myCurrentHP) => {
         });
 };
 
+const getLeaderboard = async () => {
+    try {
+        const usersData = await axios.get(`${backend}/users`);
+        // console.log(pokeData.data);
+        return usersData.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 export {
     getSinglePokemon,
     getPokemonById,
     signInUser,
     makeNewUser,
     editBattles,
+    getLeaderboard,
 };
 
 //copy of same file from VinylCountdown app, with axios fetches we used from our own backend

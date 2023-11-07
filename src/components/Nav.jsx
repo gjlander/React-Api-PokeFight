@@ -49,8 +49,8 @@ export default function Nav() {
                         </Link>
                     </NavbarItem>
                     <NavbarItem>
-                        <Link color="foreground" href="#">
-                            Score
+                        <Link color="foreground" href="/leaderboard">
+                            Leaderboard
                         </Link>
                     </NavbarItem>
                 </NavbarContent>
@@ -77,7 +77,7 @@ export default function Nav() {
                             as="button"
                             className="transition-transform"
                             color="secondary"
-                            name="Jason Hughes"
+                            name="pokefight"
                             size="sm"
                             src="https://fontmeme.com/permalink/231107/b36df41834b00ed3ae7baba47847a7a6.png"
                         />
