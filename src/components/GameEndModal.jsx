@@ -43,7 +43,13 @@ export default function GameEndModal({ myCurrentHP }) {
     return (
         <>
             {/* <Button onPress={onOpen}>Open Modal</Button> */}
-            <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal
+                hideCloseButton={true}
+                isDismissable={false}
+                backdrop="blur"
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+            >
                 <ModalContent>
                     {() => (
                         <>

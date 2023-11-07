@@ -13,9 +13,18 @@ import {
 } from "@nextui-org/react";
 import { SearchIcon } from "../assets/SearchIcon";
 import { useAppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Nav() {
-    const { user } = useAppContext();
+    const { user, setUser } = useAppContext();
+    const navigate = useNavigate();
+    const handleSignIn = () => {
+        navigate("/signin");
+    };
+    const handleSignOut = () => {
+        navigate("/");
+        setUser(false);
+    };
     return (
         <Navbar isBordered>
             <NavbarContent justify="start">
@@ -84,12 +93,31 @@ export default function Nav() {
                         <DropdownItem key="team_settings">
                             Team Settings
                         </DropdownItem>
-                        <DropdownItem key="help_and_feedback">
-                            Help & Feedback
-                        </DropdownItem>
-                        <DropdownItem key="logout" color="danger">
-                            {user ? "Sign Out" : "Sign In"}
-                        </DropdownItem>
+                        {!user && (
+                            <DropdownItem
+                                onClick={() => navigate("/register")}
+                                key="register"
+                            >
+                                Register
+                            </DropdownItem>
+                        )}
+                        {!user ? (
+                            <DropdownItem
+                                onClick={handleSignIn}
+                                key="signin"
+                                color="success"
+                            >
+                                Sign In
+                            </DropdownItem>
+                        ) : (
+                            <DropdownItem
+                                onClick={handleSignOut}
+                                key="signout"
+                                color="danger"
+                            >
+                                Sign Out
+                            </DropdownItem>
+                        )}
                     </DropdownMenu>
                 </Dropdown>
             </NavbarContent>
