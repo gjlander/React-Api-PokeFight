@@ -28,7 +28,8 @@ export default function GameEndModal({ myCurrentHP }) {
                   ...prev,
                   battlesWon: prev.battlesWon + 1,
               }));
-    }, [onOpen, user, setUser, myCurrentHP]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [onOpen, setUser, myCurrentHP]);
 
     const navigate = useNavigate();
 

@@ -10,33 +10,6 @@ import {
 import { getLeaderboard } from "../lib/dbClient";
 import { useEffect, useState } from "react";
 
-const rows = [
-    {
-        key: "1",
-        username: "Tony Reichert",
-        battleWon: "CEO",
-        battlesLost: "Active",
-    },
-    {
-        key: "2",
-        username: "Zoey Lang",
-        battleWon: "Technical Lead",
-        battlesLost: "Paused",
-    },
-    {
-        key: "3",
-        username: "Jane Fisher",
-        battleWon: "Senior Developer",
-        battlesLost: "Active",
-    },
-    {
-        key: "4",
-        username: "William Howard",
-        battleWon: "Community Manager",
-        battlesLost: "Vacation",
-    },
-];
-
 const columns = [
     {
         key: "username",
@@ -67,7 +40,7 @@ export default function Leaderboard() {
                     username: user.username,
                     battleWon: user.battlesWon,
                     battlesLost: user.battlesLost,
-                    // totalBattles: user.battlesLost + user.battleWon,
+                    totalBattles: user.battlesLost + user.battlesWon,
                 }))
             )
         );

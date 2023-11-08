@@ -38,6 +38,7 @@ const LandingPage = () => {
                     >
                         Go Battle!
                     </Button>
+                    <h3 className="text-4xl">Type Effectiveness</h3>
                     <Table isStriped>
                         <TableHeader>
                             <TableColumn>Type</TableColumn>
@@ -193,14 +194,6 @@ const LandingPage = () => {
                             </TableRow>
                         </TableBody>
                     </Table>
-                    <p>
-                        Make beautiful websites regardless of your design
-                        experience. Lorem ipsum, dolor sit amet consectetur
-                        adipisicing elit. Voluptate nostrum mollitia, voluptas,
-                        excepturi laborum enim natus consectetur incidunt cum
-                        commodi ullam. Placeat, eligendi cumque laboriosam in
-                        sapiente animi. Cupiditate, rem.
-                    </p>
                 </CardBody>
             </Card>
         </div>
