@@ -34,7 +34,7 @@ export default function GameEndModal({ myCurrentHP }) {
     const navigate = useNavigate();
 
     const handleNewPkmn = () => {
-        navigate("/search");
+        navigate("/allpokemons");
         onOpenChange();
     };
     const handleBattleAgain = () => {
