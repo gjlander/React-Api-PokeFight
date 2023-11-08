@@ -1,7 +1,10 @@
 import axios from "axios";
 
-
-const backend = "http://localhost:7000"; //temp, will go back and configure properly for front and backend later
+// const backend = "http://localhost:7000"; //temp, will go back and configure properly for front and backend later
+let backend;
+backend = import.meta.env.DEV
+    ? import.meta.env.VITE_BACKEND_DEV
+    : import.meta.env.VITE_BACKEND_DEPLOY;
 
 const getPokemons = async () => {
     try {
@@ -34,7 +37,74 @@ const getPokemonById = async (pokeId) => {
     }
 };
 
-export {getPokemons, getSinglePokemon, getPokemonById };
+const signInUser = async (form) => {
+    try {
+        if (!form.username || !form.password)
+            throw new Error(
+                alert("Please enter a valid username and password!")
+            );
+        const userData = await axios.get(`${backend}/users/${form.username}`);
+        console.log(userData.data);
+        return userData.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+const makeNewUser = (newUser) => {
+    axios
+        .post(`${backend}/users`, {
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            email: newUser.email,
+            username: newUser.username,
+            password: newUser.password,
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+};
+
+const editBattles = (username, myCurrentHP) => {
+    let wonBattle;
+    wonBattle = myCurrentHP > 0 ? true : false;
+
+    axios
+        .patch(`${backend}/users`, {
+            username,
+            wonBattle,
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+};
+
+const getLeaderboard = async () => {
+    try {
+        const usersData = await axios.get(`${backend}/users`);
+        // console.log(pokeData.data);
+        return usersData.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export {
+    getPokemons,
+    getSinglePokemon,
+    getPokemonById,
+    signInUser,
+    makeNewUser,
+    editBattles,
+    getLeaderboard,
+};
+
 
 //copy of same file from VinylCountdown app, with axios fetches we used from our own backend
 
