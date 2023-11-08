@@ -40,10 +40,9 @@ export default function Nav() {
                         </Link>
                     </NavbarItem>
 
-
                     <NavbarItem>
                         <Link
-                            href="/search"
+                            href="/allpokemons"
                             aria-current="page"
                             color="foreground"
                         >
