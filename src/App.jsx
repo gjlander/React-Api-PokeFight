@@ -1,13 +1,16 @@
 // import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import './styles/index.css';
 
 //pages for each route
 import Layout from "./pages/Layout";
 import LandingPage from "./pages/LandingPage";
 import SearchPage from "./pages/SearchPage";
-import PokePage from "./pages/PokePage";
+// import PokePage from "./pages/PokePage";
 import GamePage from "./pages/GamePage";
+import ExtraPokePage from "./pages/ExtraPokePage";
 import NotFound from "./pages/NotFound";
+
 
 // import Background from "./components/Background";
 
@@ -18,8 +21,9 @@ function App() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<LandingPage />} />
                     <Route path="search" element={<SearchPage />} />
-                    <Route path="pokemon" element={<PokePage />} />
+                    {/* <Route path="pokemon" element={<PokePage />} /> */}
                     <Route path="battle" element={<GamePage />} />
+                    <Route path="allpokemons" element={<ExtraPokePage />} />                    
                     <Route path="*" element={<NotFound />} />
 
                     {/* routes we could add for user experience */}

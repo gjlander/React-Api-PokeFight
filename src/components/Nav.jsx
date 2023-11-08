@@ -29,7 +29,7 @@ export default function Nav() {
                         </Link>
                     </NavbarItem>
                     <NavbarItem isActive>
-                        <Link href="#" aria-current="page" color="secondary">
+                        <Link href="#Pokemons" aria-current="page" color="secondary">
                             Pokemons
                         </Link>
                     </NavbarItem>
