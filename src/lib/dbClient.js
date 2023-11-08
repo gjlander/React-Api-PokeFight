@@ -3,6 +3,17 @@ import axios from "axios";
 
 const backend = "http://localhost:7000"; //temp, will go back and configure properly for front and backend later
 
+const getPokemons = async () => {
+    try {
+        const allPokemons = await axios.get(`${backend}/pokemon`);
+        // console.log(allPokemons);
+        return allPokemons.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
 const getSinglePokemon = async (pokeName) => {
     try {
         const pokeData = await axios.get(`${backend}/pokemon/${pokeName}`);
@@ -23,7 +34,7 @@ const getPokemonById = async (pokeId) => {
     }
 };
 
-export { getSinglePokemon, getPokemonById };
+export {getPokemons, getSinglePokemon, getPokemonById };
 
 //copy of same file from VinylCountdown app, with axios fetches we used from our own backend
 
