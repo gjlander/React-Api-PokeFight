@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const backend = "http://localhost:7000"; //temp, will go back and configure properly for front and backend later
+// const backend = "http://localhost:7000"; //temp, will go back and configure properly for front and backend later
+let backend;
+backend = import.meta.env.DEV
+    ? import.meta.env.VITE_BACKEND_DEV
+    : import.meta.env.VITE_BACKEND_DEPLOY;
 
 const getSinglePokemon = async (pokeName) => {
     try {
