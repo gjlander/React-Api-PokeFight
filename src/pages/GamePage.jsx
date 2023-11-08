@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getSinglePokemon, getPokemonById, editBattles } from "../lib/dbClient";
+import { getPokemonById, editBattles } from "../lib/dbClient";
 import { useAppContext } from "../context/AppContext";
 import MyBattleCard from "../components/MyBattleCard";
 import EnemyBattleCard from "../components/EnemyBattleCard";
@@ -12,10 +12,9 @@ const GamePage = () => {
     const [myHP, setMyHP] = useState({ currentHP: 100, maxHP: 100 });
     const [enemyHP, setEnemyHP] = useState({ currentHP: 100, maxHP: 100 });
     const { user, setUser, chosenPokemon } = useAppContext();
-    // const { myPokemon, setMyPokemon } = useAppContext();
 
     useEffect(() => {
-        getSinglePokemon(chosenPokemon)
+        getPokemonById(chosenPokemon)
             .then((pokemon) => {
                 setMyPokemon(pokemon);
                 // console.log("dot notation", myPokemon.base.HP);
@@ -33,7 +32,7 @@ const GamePage = () => {
                 setEnemyPokemon(pokemon);
                 setEnemyHP((prev) => ({
                     ...prev,
-                    currentHP: pokemon.base.HP,
+                    currentHP: pokemon.base?.HP,
                     maxHP: pokemon.base.HP,
                 }));
             })

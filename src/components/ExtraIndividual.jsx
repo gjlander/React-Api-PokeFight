@@ -2,8 +2,10 @@
 // import React from "react";
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 
 const ExtraIndividual = ({ data }) => {
+    const { setChosenPokemon } = useAppContext();
     const navigate = useNavigate();
     return (
         <>
@@ -42,6 +44,7 @@ const ExtraIndividual = ({ data }) => {
                     </div>
                     <Button
                         onClick={() => {
+                            setChosenPokemon(data.id);
                             navigate("/battle");
                         }}
                         size="lg"
