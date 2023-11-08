@@ -10,7 +10,7 @@ const ExtraCard = ({ pokemon, loading, infoPokemon }) => {
             return (
               <>
                 <div
-                  className="card"
+                  className="ecard"
                   key={item.id}
                   onClick={() => infoPokemon(item)}
                 >

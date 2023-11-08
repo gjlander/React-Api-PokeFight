@@ -7,9 +7,9 @@ const ExtraIndividual = ({ data }) => {
         {!data ? (
           ""
         ) : (
-          <>         
+          <div>         
             <h1>{data.name}</h1>
-            <img
+            <img className="block mx-auto"
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`}
               alt=""
             />
@@ -36,7 +36,7 @@ const ExtraIndividual = ({ data }) => {
                 );
               })}
             </div>
-           </>
+           </div>
         )}
       </>
     );

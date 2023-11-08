@@ -36,7 +36,7 @@ const ExtraPokePage = () => {
   }, [url]);
   return (
     <>
-      <div className="container bg-yellow-200">
+      <div className="containerr bg-yellow-200">
         <div className="left-content">
           <ExtraCard
             pokemon={pokeData}
