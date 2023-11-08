@@ -1,10 +1,10 @@
 import { Progress } from "@nextui-org/react";
 import { useState } from "react";
 
-export default function HPBar({ HP }) {
+export default function HPBar({ HP, myHP }) {
     const [value, setValue] = useState(HP);
     setValue; //to make VS Code shutup setValue isn't called yet.
-    console.log(HP);
+    // console.log(HP);
     return (
         <Progress
             aria-label="HP"

@@ -24,12 +24,19 @@ export default function Nav() {
                 </NavbarBrand>
                 <NavbarContent className="hidden sm:flex gap-3">
                     <NavbarItem>
-                        <Link color="foreground" href="#">
+                        <Link color="foreground" href="/">
                             Home
                         </Link>
                     </NavbarItem>
-                    <NavbarItem isActive>
-                        <Link href="#Pokemons" aria-current="page" color="secondary">
+
+
+                    <NavbarItem>
+                        <Link
+                            href="/search"
+                            aria-current="page"
+                            color="foreground"
+                        >
+
                             Pokemons
                         </Link>
                     </NavbarItem>
