@@ -39,13 +39,15 @@ export default function Nav() {
                             Home
                         </Link>
                     </NavbarItem>
+
+
                     <NavbarItem>
                         <Link
                             href="/search"
                             aria-current="page"
                             color="foreground"
                         >
-                            Pokemon
+                            Pokemons
                         </Link>
                     </NavbarItem>
                     <NavbarItem>

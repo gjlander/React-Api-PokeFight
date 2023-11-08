@@ -6,6 +6,17 @@ backend = import.meta.env.DEV
     ? import.meta.env.VITE_BACKEND_DEV
     : import.meta.env.VITE_BACKEND_DEPLOY;
 
+const getPokemons = async () => {
+    try {
+        const allPokemons = await axios.get(`${backend}/pokemon`);
+        // console.log(allPokemons);
+        return allPokemons.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
 const getSinglePokemon = async (pokeName) => {
     try {
         const pokeData = await axios.get(`${backend}/pokemon/${pokeName}`);
@@ -85,6 +96,7 @@ const getLeaderboard = async () => {
 };
 
 export {
+    getPokemons,
     getSinglePokemon,
     getPokemonById,
     signInUser,
@@ -92,6 +104,7 @@ export {
     editBattles,
     getLeaderboard,
 };
+
 
 //copy of same file from VinylCountdown app, with axios fetches we used from our own backend
 
