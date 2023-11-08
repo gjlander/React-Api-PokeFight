@@ -30,13 +30,13 @@ const LandingPage = () => {
                     <Image className="mx-auto" src={exampleBattle} />
                     <Button
                         onClick={() => {
-                            navigate("/battle");
+                            navigate("/allpokemons");
                         }}
                         size="lg"
                         color="danger"
                         className="m-4"
                     >
-                        Go Battle!
+                        Choose your pokemon!
                     </Button>
                     <h3 className="text-4xl">Type Effectiveness</h3>
                     <Table isStriped>
