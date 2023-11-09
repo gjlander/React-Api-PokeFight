@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
+import { editBattles } from "../lib/dbClient";
 import {
     Modal,
     ModalContent,
@@ -11,7 +12,7 @@ import {
     useDisclosure,
 } from "@nextui-org/react";
 
-export default function GameEndModal({ myCurrentHP }) {
+export default function GameEndModal({ myCurrentHP, enemyCurrentHP }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { user, setUser } = useAppContext();
 
@@ -19,6 +20,10 @@ export default function GameEndModal({ myCurrentHP }) {
         console.log("modal effect was called");
         onOpen();
         if (!user) return;
+        if ((enemyCurrentHP <= 0 || myCurrentHP <= 0) && user) {
+            editBattles(user.username, myCurrentHP);
+            // console.log("battle post was called");
+        }
         myCurrentHP <= 0
             ? setUser((prev) => ({
                   ...prev,

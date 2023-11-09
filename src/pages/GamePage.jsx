@@ -39,28 +39,32 @@ const GamePage = () => {
             .catch((error) => console.error(error));
     }, []);
 
-    useEffect(() => {
-        // if (!enemyHP || !myHP) return;
-        if ((enemyHP.currentHP <= 0 || myHP.currentHP <= 0) && user) {
-            editBattles(user.username, myHP.currentHP);
-            // enemyHP.currentHP <= 0
-            //     ? setUser((prev) => ({
-            //           ...prev,
-            //           battlesWon: prev.battlesWon + 1,
-            //       }))
-            //     : setUser((prev) => ({
-            //           ...prev,
-            //           battlesLost: prev.battlesLost + 1,
-            //       }));
-        }
-    }, [enemyHP, myHP, user, setUser]);
+    // useEffect(() => {
+    //     // if (!enemyHP || !myHP) return;
+    //     if ((enemyHP.currentHP <= 0 || myHP.currentHP <= 0) && user) {
+    //         editBattles(user.username, myHP.currentHP);
+    //         console.log("battle post was called");
+    //         // enemyHP.currentHP <= 0
+    //         //     ? setUser((prev) => ({
+    //         //           ...prev,
+    //         //           battlesWon: prev.battlesWon + 1,
+    //         //       }))
+    //         //     : setUser((prev) => ({
+    //         //           ...prev,
+    //         //           battlesLost: prev.battlesLost + 1,
+    //         //       }));
+    //     }
+    // }, [enemyHP, myHP, user, setUser]);
 
     return (
         <div className="min-h-screen min-w-screen flex flex-col items-center gap-10">
             <h3 className="text-4xl mt-10">Battle!</h3>
             <div className="w-full flex items-center justify-center gap-8">
                 {(enemyHP.currentHP <= 0 || myHP.currentHP <= 0) && (
-                    <GameEndModal myCurrentHP={myHP.currentHP} />
+                    <GameEndModal
+                        myCurrentHP={myHP.currentHP}
+                        enemyCurrentHP={enemyHP.currentHP}
+                    />
                 )}
                 {myPokemon && (
                     <MyBattleCard
