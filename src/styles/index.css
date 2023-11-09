@@ -58,7 +58,7 @@ body {
     font-weight: bold;
     letter-spacing: 1px;
 }
-.abilities {
+.types {
     width: 70%;
     margin: auto;
     display: flex;
@@ -66,7 +66,7 @@ body {
     align-items: center;
     margin-top: 1rem;
 }
-.abilities .group {
+.types .group {
     background-color: #b74555;
     color: white;
     padding: 0.5rem;

@@ -20,8 +20,8 @@ const ExtraIndividual = ({ data }) => {
                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`}
                         alt=""
                     />
-                    <div className="abilities">
-                        <h1 className="heading">Abilities:</h1>
+                    <div className="types">
+                        <h1 className="heading">Type:</h1>
                         {data.abilities.map((poke) => {
                             return (
                                 <>
@@ -34,7 +34,7 @@ const ExtraIndividual = ({ data }) => {
                     </div>
 
 
-                    <div className="base-stat">
+                    <div className="base-stat text-yellow-600">
                         {data.stats.map((poke) => {
                             return (
                                 <>
