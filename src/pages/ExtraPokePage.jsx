@@ -20,20 +20,41 @@ const ExtraPokePage = () => {
     getPokemon(res.data.results);
     setLoading(false);
   };
-  const getPokemon = async (res) => {
-    res.map(async (item) => {
-      const result = await axios.get(item.url);
-      setPokeData((state) => {
-        console.log(state);
-        state = [...state, result.data];
-        state.sort((a, b) => (a.id > b.id ? 1 : -1));
-        return state;
+
+  // below function has map that has setPokeData function, it renders twice
+  // const getPokemon = async (res) => {
+  //   res.map(async (item) => {
+  //     const result = await axios.get(item.url);
+  //     setPokeData((state) => {
+  //       console.log(state);
+  //       state = [...state, result.data];
+  //       state.sort((a, b) => (a.id > b.id ? 1 : -1));
+  //       return state;
+  //     });
+  //   });
+  // };
+
+  const getPokemon =  (res) => {
+      res.map( async(item) => {
+      const result = await axios.get(item.url); 
+      
+      setPokeData((prevState) => {
+        const dataExists = prevState.some((item) => item.id === result.data.id);
+        if (!dataExists) {
+          const newState = [...prevState, result.data];
+          newState.sort((a, b) => (a.id > b.id ? 1 : -1));
+          return newState;
+        }      
+        return prevState;
       });
     });
   };
   useEffect(() => {
     pokeFun();
   }, [url]);
+  console.log(pokeData);
+
+
   return (
     <>
       <div className="containerr bg-yellow-200">
