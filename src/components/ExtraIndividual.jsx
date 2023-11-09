@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-
-import { Button } from "@nextui-org/react";
+import { btnColor } from "../utils/battleData.js";
+import { Button, Progress } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 
@@ -14,19 +14,19 @@ const ExtraIndividual = ({ data }) => {
                 ""
             ) : (
                 <div>
-                    <h1>{data.name}</h1>
+                    <h1 className="text-yellow-600">{data.name}</h1>
                     <img
-                        className="block mx-auto"
+                        className=" "
                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`}
                         alt=""
                     />
                     <div className="types">
-                        <h1 className="heading">Type:</h1>
-                        {data.abilities.map((poke) => {
+                        <h1 className="heading {btnColor(type)}">Type:</h1>
+                        {data.types.map((poke) => {
                             return (
                                 <>
                                     <div className="group">
-                                        <h2>{poke.ability.name}</h2>
+                                        <h2>{poke.type.name}</h2>
                                     </div>
                                 </>
                             );
@@ -39,7 +39,16 @@ const ExtraIndividual = ({ data }) => {
                             return (
                                 <>
                                     <h3>
-                                        {poke.stat.name}:{poke.base_stat}
+                                        {poke.stat.name}:<Progress
+                                                            className="max-w-md mb-4"
+                                                            color="danger"
+                                                            now={poke.base_stat}/>
+                                        
+               {/* <Progress                    
+                    color="danger"
+                    label={`HP ${enemyHP.currentHP}/${enemyHP.maxHP}`}
+                    className="max-w-md mb-4"
+                /> */}
                                     </h3>
                                 </>
                             );

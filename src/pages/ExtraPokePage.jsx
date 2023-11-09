@@ -1,5 +1,6 @@
 import axios from "axios";
 import ExtraCard from "../components/ExtraCard";
+// import EnemyBattleCard from "../components/EnemyBattleCard";
 import ExtraIndividual from "../components/ExtraIndividual";
 import { useState, useEffect } from "react";
 // import "../styles/index.css";
@@ -91,6 +92,8 @@ const ExtraPokePage = () => {
         </div>
         <div className="right-content">
           <ExtraIndividual data={pokeDex} />
+          
+
         </div>
       </div>
     </>
