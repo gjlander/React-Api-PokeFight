@@ -59,7 +59,7 @@ const btnColor = (type) => {
 
 const baseAttack = (baseA, baseB) => {
     let dmg = baseA.Attack - baseB.Defense;
-    console.log(baseA.Attack, baseB.Defense);
+    // console.log(baseA.Attack, baseB.Defense);
     dmg < 3 ? (dmg = 3) : dmg;
     dmg > 15 ? (dmg = 15) : dmg;
     // console.log(dmg);

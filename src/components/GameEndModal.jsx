@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
+import { editBattles } from "../lib/dbClient";
 import {
     Modal,
     ModalContent,
@@ -10,16 +12,34 @@ import {
     useDisclosure,
 } from "@nextui-org/react";
 
-export default function GameEndModal({ myCurrentHP }) {
+export default function GameEndModal({ myCurrentHP, enemyCurrentHP }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    // onOpen();
+    const { user, setUser } = useAppContext();
+
     useEffect(() => {
+        console.log("modal effect was called");
         onOpen();
-    }, [onOpen]);
+        if (!user) return;
+        if ((enemyCurrentHP <= 0 || myCurrentHP <= 0) && user) {
+            editBattles(user.username, myCurrentHP);
+            // console.log("battle post was called");
+        }
+        myCurrentHP <= 0
+            ? setUser((prev) => ({
+                  ...prev,
+                  battlesLost: prev.battlesLost + 1,
+              }))
+            : setUser((prev) => ({
+                  ...prev,
+                  battlesWon: prev.battlesWon + 1,
+              }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [onOpen, setUser, myCurrentHP]);
+
     const navigate = useNavigate();
 
     const handleNewPkmn = () => {
-        navigate("/search");
+        navigate("/allpokemons");
         onOpenChange();
     };
     const handleBattleAgain = () => {
@@ -30,7 +50,13 @@ export default function GameEndModal({ myCurrentHP }) {
     return (
         <>
             {/* <Button onPress={onOpen}>Open Modal</Button> */}
-            <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal
+                hideCloseButton={true}
+                isDismissable={false}
+                backdrop="blur"
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+            >
                 <ModalContent>
                     {() => (
                         <>
@@ -38,12 +64,22 @@ export default function GameEndModal({ myCurrentHP }) {
                                 {myCurrentHP > 0 ? "You won!" : "You lost!"}
                             </ModalHeader>
                             <ModalBody>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Nullam pulvinar risus non
-                                    risus hendrerit venenatis. Pellentesque sit
-                                    amet hendrerit risus, sed porttitor quam.
-                                </p>
+                                {user ? (
+                                    <>
+                                        {" "}
+                                        <p>
+                                            Total Battles Won: {user.battlesWon}
+                                        </p>
+                                        <p>
+                                            Total Battle Lost:{" "}
+                                            {user.battlesLost}
+                                        </p>
+                                    </>
+                                ) : (
+                                    <p>
+                                        Login to keep track of your battle data!
+                                    </p>
+                                )}
                             </ModalBody>
                             <ModalFooter>
                                 <Button

@@ -12,8 +12,19 @@ import {
     Avatar,
 } from "@nextui-org/react";
 import { SearchIcon } from "../assets/SearchIcon";
+import { useAppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Nav() {
+    const { user, setUser } = useAppContext();
+    const navigate = useNavigate();
+    const handleSignIn = () => {
+        navigate("/signin");
+    };
+    const handleSignOut = () => {
+        navigate("/");
+        setUser(false);
+    };
     return (
         <Navbar isBordered>
             <NavbarContent justify="start">
@@ -29,20 +40,18 @@ export default function Nav() {
                         </Link>
                     </NavbarItem>
 
-
                     <NavbarItem>
                         <Link
-                            href="/search"
+                            href="/allpokemons"
                             aria-current="page"
                             color="foreground"
                         >
-
                             Pokemons
                         </Link>
                     </NavbarItem>
                     <NavbarItem>
-                        <Link color="foreground" href="#">
-                            Score
+                        <Link color="foreground" href="/leaderboard">
+                            Leaderboard
                         </Link>
                     </NavbarItem>
                 </NavbarContent>
@@ -69,26 +78,47 @@ export default function Nav() {
                             as="button"
                             className="transition-transform"
                             color="secondary"
-                            name="Jason Hughes"
+                            name="pokefight"
                             size="sm"
-                            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                            src="https://fontmeme.com/permalink/231107/b36df41834b00ed3ae7baba47847a7a6.png"
                         />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Profile Actions" variant="flat">
-                        <DropdownItem key="profile" className="h-14 gap-2">
-                            <p className="font-semibold">Signed in as</p>
-                            <p className="font-semibold">zoey@example.com</p>
-                        </DropdownItem>
+                        {user && (
+                            <DropdownItem key="profile" className="h-14 gap-2">
+                                <p className="font-semibold">Signed in as</p>
+                                <p className="font-semibold">{user.username}</p>
+                            </DropdownItem>
+                        )}
                         <DropdownItem key="settings">My Settings</DropdownItem>
                         <DropdownItem key="team_settings">
                             Team Settings
                         </DropdownItem>
-                        <DropdownItem key="help_and_feedback">
-                            Help & Feedback
-                        </DropdownItem>
-                        <DropdownItem key="logout" color="danger">
-                            Log Out
-                        </DropdownItem>
+                        {!user && (
+                            <DropdownItem
+                                onClick={() => navigate("/register")}
+                                key="register"
+                            >
+                                Register
+                            </DropdownItem>
+                        )}
+                        {!user ? (
+                            <DropdownItem
+                                onClick={handleSignIn}
+                                key="signin"
+                                color="success"
+                            >
+                                Sign In
+                            </DropdownItem>
+                        ) : (
+                            <DropdownItem
+                                onClick={handleSignOut}
+                                key="signout"
+                                color="danger"
+                            >
+                                Sign Out
+                            </DropdownItem>
+                        )}
                     </DropdownMenu>
                 </Dropdown>
             </NavbarContent>
