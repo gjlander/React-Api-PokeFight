@@ -34,7 +34,7 @@ const ExtraIndividual = ({ data }) => {
                     </div>
 
 
-                    <div className="base-stat">
+                    <div className="base-stat text-yellow-600">
                         {data.stats.map((poke) => {
                             return (
                                 <>
