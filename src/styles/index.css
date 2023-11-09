@@ -31,7 +31,7 @@ body {
     width: 300px;
     height: 90px;
     background-color: #9eb2f9;
-    /* border-radius: 1rem; */
+    border-radius: 1.5rem;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
     padding: 0 1.5rem;
     display: flex;
@@ -52,13 +52,13 @@ body {
 .right-content img {
     margin: 1.5rem;
     height: 160px;
-}
+  }
 .right-content h1 {
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 1px;
 }
-.abilities {
+.types {
     width: 70%;
     margin: auto;
     display: flex;
@@ -66,7 +66,7 @@ body {
     align-items: center;
     margin-top: 1rem;
 }
-.abilities .group {
+.types .group {
     background-color: #b74555;
     color: white;
     padding: 0.5rem;
