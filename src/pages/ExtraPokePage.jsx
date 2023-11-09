@@ -57,7 +57,7 @@ const ExtraPokePage = () => {
 
   return (
     <>
-      <div className="containerr bg-yellow-200">
+      <div className="containerr ">
         <div className="left-content">
           <ExtraCard
             pokemon={pokeData}

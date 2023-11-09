@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-// import React from "react";
+
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
+
 
 const ExtraIndividual = ({ data }) => {
     const { setChosenPokemon } = useAppContext();
@@ -31,6 +32,8 @@ const ExtraIndividual = ({ data }) => {
                             );
                         })}
                     </div>
+
+
                     <div className="base-stat">
                         {data.stats.map((poke) => {
                             return (
@@ -56,6 +59,7 @@ const ExtraIndividual = ({ data }) => {
                 </div>
             )}
         </>
+
     );
 };
 export default ExtraIndividual;
