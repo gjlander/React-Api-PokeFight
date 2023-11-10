@@ -50,6 +50,16 @@ const authSignInUser = async (form) => {
     }
 };
 
+const authMakeNewUser = async (form) => {
+    try {
+        const { headers } = await axios.post(`${backend}/auth/register`, form);
+        return headers;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+//original user paths
 const signInUser = async (form) => {
     try {
         if (!form.username || !form.password)
@@ -117,6 +127,7 @@ export {
     editBattles,
     getLeaderboard,
     authSignInUser,
+    authMakeNewUser,
 };
 
 //copy of same file from VinylCountdown app, with axios fetches we used from our own backend
