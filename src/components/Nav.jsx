@@ -14,13 +14,25 @@ import {
 import { SearchIcon } from "../assets/SearchIcon";
 import { useAppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-export default function Nav() {
+export default function Nav({ setPokemonName }) {
     const { user, setUser } = useAppContext();
+    const [localValue, setLocalValue] = useState("");
+
     const navigate = useNavigate();
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        setPokemonName(localValue);
+        setLocalValue("");
+        navigate("search");
+    };
+
     const handleSignIn = () => {
         navigate("/signin");
     };
+
     const handleSignOut = () => {
         navigate("/");
         setUser(false);
@@ -58,19 +70,23 @@ export default function Nav() {
             </NavbarContent>
 
             <NavbarContent as="div" className="items-center" justify="end">
-                <Input
-                    classNames={{
-                        base: "max-w-full sm:max-w-[10rem] h-10",
-                        mainWrapper: "h-full",
-                        input: "text-small",
-                        inputWrapper:
-                            "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-                    }}
-                    placeholder="Type to search..."
-                    size="sm"
-                    startContent={<SearchIcon size={18} />}
-                    type="search"
-                />
+                <form onSubmit={handleSearchSubmit}>
+                    <Input
+                        classNames={{
+                            base: "max-w-full sm:max-w-[10rem] h-10",
+                            mainWrapper: "h-full",
+                            input: "text-small",
+                            inputWrapper:
+                                "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                        }}
+                        placeholder="Type to search..."
+                        size="sm"
+                        startContent={<SearchIcon size={18} />}
+                        type="search"
+                        value={localValue}
+                        onValueChange={setLocalValue}
+                    />
+                </form>
                 <Dropdown placement="bottom-end">
                     <DropdownTrigger>
                         <Avatar
