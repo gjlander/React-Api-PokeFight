@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function Nav({ setPokemonName }) {
-    const { user, setUser } = useAppContext();
+    const { isAuth, setToken, setIsAuth, setUser, user } = useAppContext();
     const [localValue, setLocalValue] = useState("");
 
     const navigate = useNavigate();
@@ -35,7 +35,11 @@ export default function Nav({ setPokemonName }) {
 
     const handleSignOut = () => {
         navigate("/");
-        setUser(false);
+        setToken(null);
+        setIsAuth(false);
+        setUser(null);
+        localStorage.removeItem("token");
+        localStorage.removeItem("chosenPokemon");
     };
     return (
         <Navbar isBordered>
@@ -100,7 +104,7 @@ export default function Nav({ setPokemonName }) {
                         />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Profile Actions" variant="flat">
-                        {user && (
+                        {isAuth && (
                             <DropdownItem key="profile" className="h-14 gap-2">
                                 <p className="font-semibold">Signed in as</p>
                                 <p className="font-semibold">{user.username}</p>
@@ -110,7 +114,7 @@ export default function Nav({ setPokemonName }) {
                         <DropdownItem key="team_settings">
                             Team Settings
                         </DropdownItem>
-                        {!user && (
+                        {!isAuth && (
                             <DropdownItem
                                 onClick={() => navigate("/register")}
                                 key="register"
