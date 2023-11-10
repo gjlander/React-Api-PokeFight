@@ -4,7 +4,6 @@ import { Button, Progress } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 
-
 const ExtraIndividual = ({ data }) => {
     const { setChosenPokemon } = useAppContext();
     const navigate = useNavigate();
@@ -13,13 +12,24 @@ const ExtraIndividual = ({ data }) => {
             {!data ? (
                 ""
             ) : (
-                <div>
+                <div className="flex flex-col items-center justify-center ">
                     <h1 className="text-yellow-600">{data.name}</h1>
                     <img
-                        className=" "
+                        className="w-full"
                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`}
                         alt=""
                     />
+                    <Button
+                        onClick={() => {
+                            setChosenPokemon(data.id);
+                            navigate("/battle");
+                        }}
+                        size="lg"
+                        color="danger"
+                        className="m-4"
+                    >
+                        Go Battle!
+                    </Button>
                     <div className="types">
                         <h1 className="heading {btnColor(type)}">Type:</h1>
                         {data.types.map((poke) => {
@@ -33,18 +43,18 @@ const ExtraIndividual = ({ data }) => {
                         })}
                     </div>
 
-
                     <div className="base-stat text-yellow-600">
                         {data.stats.map((poke) => {
                             return (
                                 <>
                                     <h3>
-                                        {poke.stat.name}:<Progress
-                                                            className="max-w-md mb-4"
-                                                            color="danger"
-                                                            now={poke.base_stat}/>
-                                        
-               {/* <Progress                    
+                                        {poke.stat.name}:
+                                        <Progress
+                                            className="max-w-md mb-4"
+                                            color="danger"
+                                            now={poke.base_stat}
+                                        />
+                                        {/* <Progress                    
                     color="danger"
                     label={`HP ${enemyHP.currentHP}/${enemyHP.maxHP}`}
                     className="max-w-md mb-4"
@@ -54,21 +64,9 @@ const ExtraIndividual = ({ data }) => {
                             );
                         })}
                     </div>
-                    <Button
-                        onClick={() => {
-                            setChosenPokemon(data.id);
-                            navigate("/battle");
-                        }}
-                        size="lg"
-                        color="danger"
-                        className="m-4"
-                    >
-                        Go Battle!
-                    </Button>
                 </div>
             )}
         </>
-
     );
 };
 export default ExtraIndividual;
