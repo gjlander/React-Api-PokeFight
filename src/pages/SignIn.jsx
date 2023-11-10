@@ -4,14 +4,14 @@ import { Input, Button } from "@nextui-org/react";
 import { MailIcon } from "../assets/MailIcon.jsx";
 import { EyeFilledIcon } from "../assets/EyeFilledIcon.jsx";
 import { EyeSlashFilledIcon } from "../assets/EyeSlashFilledIcon.jsx";
-import { signInUser, authSignInUser } from "../lib/dbClient.js";
+import { authSignInUser } from "../lib/dbClient.js";
 import { useAppContext } from "../context/AppContext.jsx";
 const SignIn = () => {
     const [form, setForm] = useState({
         username: "",
         password: "",
     });
-    const { setToken, isAuth, setUser } = useAppContext();
+    const { setToken, isAuth } = useAppContext();
 
     //state and function for toggling password visibility
     const [isVisible, setIsVisible] = useState(false);
@@ -34,29 +34,29 @@ const SignIn = () => {
             .catch((error) => console.error(error));
     };
 
-    const handleSubmit = () => {
-        //updated logic from sign in modal with checks
-        signInUser(form)
-            .then((userData) => {
-                let test = userData;
-                if (userData) {
-                    setUser(userData);
-                } else {
-                    setUser(false);
-                }
-                return test;
-                // userData.length ? setUser(userData) : setUser(false);
-            })
-            .then((test) => {
-                if (!test) return alert("Invalid username or password!");
-                setForm({
-                    username: "",
-                    password: "",
-                });
-                navigate("/");
-            })
-            .catch((error) => console.error(error));
-    };
+    // const handleSubmit = () => {
+    //     //updated logic from sign in modal with checks
+    //     signInUser(form)
+    //         .then((userData) => {
+    //             let test = userData;
+    //             if (userData) {
+    //                 setUser(userData);
+    //             } else {
+    //                 setUser(false);
+    //             }
+    //             return test;
+    //             // userData.length ? setUser(userData) : setUser(false);
+    //         })
+    //         .then((test) => {
+    //             if (!test) return alert("Invalid username or password!");
+    //             setForm({
+    //                 username: "",
+    //                 password: "",
+    //             });
+    //             navigate("/");
+    //         })
+    //         .catch((error) => console.error(error));
+    // };
 
     if (isAuth) return <Navigate to="/" />;
 

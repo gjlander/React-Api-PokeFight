@@ -7,14 +7,12 @@ export const useAppContext = () => useContext(AppContextObj);
 
 const AppContext = ({ children }) => {
     // const isSignedIn = JSON.parse(localStorage.getItem("user"));
-    // const hasPokemon = JSON.parse(localStorage.getItem("chosenPokemon"));
+    const hasPokemon = JSON.parse(localStorage.getItem("chosenPokemon"));
 
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [isAuth, setIsAuth] = useState(false);
     const [user, setUser] = useState(null);
-    const [chosenPokemon, setChosenPokemon] = useState(
-        localStorage.getItem("chosenPokemon")
-    );
+    const [chosenPokemon, setChosenPokemon] = useState(hasPokemon);
 
     const validateToken = async () => {
         try {
@@ -32,9 +30,12 @@ const AppContext = ({ children }) => {
 
     useEffect(() => {
         token && validateToken();
-        localStorage.setItem("chosenPokemon", JSON.stringify(chosenPokemon));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token, chosenPokemon]);
+    }, [token]);
+
+    useEffect(() => {
+        localStorage.setItem("chosenPokemon", JSON.stringify(chosenPokemon));
+    }, [chosenPokemon]);
 
     // useEffect(() => {
     //     localStorage.setItem("user", JSON.stringify(user));
