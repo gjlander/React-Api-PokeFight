@@ -13,9 +13,21 @@ import {
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import exampleBattle from "../assets/ExampleBattle.png";
+import { getHeader } from "../lib/dbClient";
+import { useEffect, useState } from "react";
 
 const LandingPage = () => {
     const navigate = useNavigate();
+    const [myHeader, setMyHeader] = useState();
+
+    useEffect(() => {
+        getHeader()
+            .then((header) => {
+                // console.log(header[0].header);
+                setMyHeader(header[0].header);
+            })
+            .catch((error) => console.log(error));
+    }, []);
 
     return (
         <div className="min-h-screen min-w-screen flex flex-col items-center p-4 gap-8">
@@ -23,7 +35,9 @@ const LandingPage = () => {
             <Card>
                 <CardHeader className="w-full flex  justify-center">
                     <h3 className="text-4xl">
-                        Battle with your favorite Pokemon!
+                        {myHeader
+                            ? myHeader
+                            : "Battle with your favorite Pokemon!"}
                     </h3>
                 </CardHeader>
                 <CardBody className="flex flex-col items-center">

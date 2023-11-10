@@ -6,6 +6,16 @@ backend = import.meta.env.DEV
     ? import.meta.env.VITE_BACKEND_DEV
     : import.meta.env.VITE_BACKEND_DEPLOY;
 
+const getHeader = async () => {
+    try {
+        const { data } = await axios.get(`${backend}/display`);
+        // console.log(allPokemons);
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 const getPokemons = async () => {
     try {
         const allPokemons = await axios.get(`${backend}/pokemon`);
@@ -119,6 +129,7 @@ const getLeaderboard = async () => {
 };
 
 export {
+    getHeader,
     getPokemons,
     getSinglePokemon,
     getPokemonById,
