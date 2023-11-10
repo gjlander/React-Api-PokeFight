@@ -16,7 +16,6 @@ const getPokemons = async () => {
     }
 };
 
-
 const getSinglePokemon = async (pokeName) => {
     try {
         const pokeData = await axios.get(`${backend}/pokemon/${pokeName}`);
@@ -32,6 +31,20 @@ const getPokemonById = async (pokeId) => {
         const pokeData = await axios.get(`${backend}/pokemon/withid/${pokeId}`);
         // console.log(pokeData.data);
         return pokeData.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+//auth paths
+const authSignInUser = async (form) => {
+    try {
+        if (!form.username || !form.password)
+            throw new Error(
+                alert("Please enter a valid username and password!")
+            );
+        const { headers } = await axios.post(`${backend}/auth/login`, form);
+        return headers;
     } catch (error) {
         console.error(error);
     }
@@ -103,8 +116,8 @@ export {
     makeNewUser,
     editBattles,
     getLeaderboard,
+    authSignInUser,
 };
-
 
 //copy of same file from VinylCountdown app, with axios fetches we used from our own backend
 
