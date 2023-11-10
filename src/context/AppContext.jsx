@@ -16,9 +16,12 @@ const AppContext = ({ children }) => {
 
     const validateToken = async () => {
         try {
-            const { data } = await axios("http://localhost:7000/auth/me", {
-                headers: { Authorization: token },
-            });
+            const { data } = await axios(
+                "https://pokefight-server-onts.onrender.com/auth/me",
+                {
+                    headers: { Authorization: token },
+                }
+            );
             setIsAuth(true);
             setUser(data);
         } catch (error) {
